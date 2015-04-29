@@ -1,0 +1,6 @@
+{
+"games":"<h1>{{lang.games}}<\/h1>{{#games}}    <div class=\"gameItem\" id=\"game_{{id}}\">        <span class=\"playerHost\">{{host}}<\/span><br>        <span class=\"gold\">{{lang.gold}}: {{gold}}<\/span>    <\/div>{{\/games}}",
+"matchmaking":"<div class=\"matchmakingInner\">    <div class=\"leftColumn\">        <div class=\"nationSelect\">            {{#nations}}                <div id=\"nation_{{id}}\" class=\"nation {{color}}\">{{name}}<\/div>            {{\/nations}}        <\/div>        <br>        <div class=\"hostGame\">            <label for=\"gold\">{{lang.gold}}<\/label><input id=\"gold\" class=\"inputGold\" type=\"text\" value=\"50\"><br>            <button class=\"performHostGame\">{{lang.hostGame}}<\/button>        <\/div>        <div class=\"clearer\"><\/div>        <div class=\"players\"><\/div>        <div class=\"clearer\"><\/div>    <\/div>    <div class=\"games\"><\/div><\/div>",
+"players":"<h1>{{lang.label}}<\/h1>{{#players}}    <div class=\"playerItem\" id=\"player_{{id}}\">        <span class=\"playerNick\">{{nick}} {{state}}<\/span><br>    <\/div>{{\/players}}<div class=\"clearer\"><\/div>"
+
+}

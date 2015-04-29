@@ -1,0 +1,9 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <option name="myLocal" value="true" />
+    <inspection_tool class="DartAnalysisServerGlobalInspectionTool" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="DartPathPackageReference" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="DartSdkIsNotConfigured" enabled="true" level="ERROR" enabled_by_default="true" />
+  </profile>
+</component>
