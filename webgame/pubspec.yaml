@@ -1,0 +1,14 @@
+name: deskovka_client
+version: 0.0.1
+description: Hexagon webgame
+environment:
+  sdk: '>=1.0.0 <2.0.0'
+dependencies:
+  browser: any
+  mustache_no_mirror: any
+  mime: any
+  shelf: any
+  shelf_route: any
+  shelf_simple_session: any
+  shelf_web_socket: any
+  html: any

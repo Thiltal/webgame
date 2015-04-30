@@ -20,6 +20,7 @@ part "src/game_map_adapter.dart";
 part "src/widgets/matchmaking_players.dart";
 part "src/widgets/matchmaking_widget.dart";
 part "src/widgets/matchmaking_games.dart";
+part "src/widgets/game_phaser.dart";
 
 List<Function>  repaints = [];
 Map<String, ImageElement> images = {};
@@ -34,6 +35,7 @@ void main() {
 
 void start(){
   gf = new GameFlow();
+  gf.init();
   repaintLoop(null);
 }
 

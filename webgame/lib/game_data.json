@@ -1,0 +1,44 @@
+{
+    "races": [{
+            "name": "člověk",
+            "id": "human"
+        }, {
+            "name": "nemrtvý",
+            "id": "undead"
+        }, {
+            "name": "elf",
+            "id": "elf"
+        }, {
+            "name": "gutam",
+            "id": "gultam"
+        }
+    ],
+    "abilities": [
+        {
+            "type": "Move",
+            "img": "ability_move",
+            "id": "move"
+        }, {
+            "type": "Attack",
+            "img": "ability_attack",
+            "id": "attack"
+        }
+    ],
+    "units": [
+        {
+            "id": "kopi",
+            "name": "kopiník",
+            "race": "human",
+            "health": 1,
+            "armor": 0,
+            "speed": 4,
+            "attack": [0, 0, 0, 1, 2, 2],
+            "cost": 1,
+            "abilities": ["move", "attack"]
+
+        }
+    ]
+
+
+
+}

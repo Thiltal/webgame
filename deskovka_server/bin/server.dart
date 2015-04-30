@@ -15,6 +15,9 @@ import 'dart:async';
 import 'dart:convert';
 import "package:deskovka_libs/deskovka_libs.dart";
 
+
+
+
 part "src/worlds.dart";
 part "src/player.dart";
 part "src/server_world.dart";
@@ -123,6 +126,9 @@ void handleSockets(socket, protocol, Shelf.Request request){
       case ACTION_TRACK_CHANGE:
         outAction = trackChange(out, player, data);
         break;
+      case ACTION_NEXT_TURN:
+        outAction = newTurn(out, player, data);
+        break;
     }
     if(outAction==ACTION_DO_NOTHING)return;
     outBox["state"] = player.state;
@@ -131,6 +137,12 @@ void handleSockets(socket, protocol, Shelf.Request request){
     socket.add(JSON.encode(outBox));
   });
 }
+
+String newTurn(Map out, Player player, Map data){
+  player.game.nextTurn(player);
+  return ACTION_DO_NOTHING;
+}
+
 
 String trackChange(Map out, Player player, Map data){
 //  print("action trackChnge sent to ${player.game.opponent(player).nick}");
@@ -164,7 +176,7 @@ String getState(Map out, Player player, _){
   }
   String state = player.state;
   if(player.game != null){
-    out["game"] = player.game.toJson(player);
+    out["game"] = player.game.toJson(player, player.state!=STATE_GAME);
   }else{
     out["player"] = player.toJson(player);
   }
