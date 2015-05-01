@@ -54,7 +54,7 @@ Handler webSocketHandler(Function onConnection, {Iterable<String> protocols,
     }
 
     var innerOnConnection = onConnection;
-    onConnection = (webSocket, protocol, Request request) => innerOnConnection(webSocket, protocol,request);
+    onConnection = (webSocket, protocol, Request request) => innerOnConnection(webSocket, protocol, request);
   }
 
   return new WebSocketHandler(onConnection, protocols, allowedOrigins).handle;

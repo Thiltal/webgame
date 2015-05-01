@@ -2,7 +2,6 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 library deskovka_server;
 import 'dart:io';
-
 import 'package:args/args.dart';
 import 'package:shelf/shelf.dart' as Shelf;
 import 'package:shelf/shelf_io.dart' as Io;
@@ -11,13 +10,10 @@ import '../lib/shelf_static/shelf_static.dart' as Static;
 import '../lib/shelf_web_socket/shelf_web_socket.dart' as sWs;
 import 'package:shelf_route/shelf_route.dart' as Route;
 import 'package:shelf_simple_session/shelf_simple_session.dart' as SimpleSession;
+//import 'package:path/path.dart' as Path;
 import 'dart:async';
 import 'dart:convert';
 import "../lib/deskovka_libs.dart";
-
-
-
-
 part "src/worlds.dart";
 part "src/player.dart";
 part "src/server_world.dart";
@@ -25,10 +21,10 @@ part "src/load.dart";
 part "src/action.dart";
 part "src/game.dart";
 part "src/games.dart";
+part "src/utils.dart";
 
 typedef DHandler(Shelf.Request request, StreamController controller);
-
-const PATH_TO_RESOURCES = "../resources/module.json";
+const PATH_TO_RESOURCES = "resources/module.json";
 const LOGGED_PLAYER = "logged";
 Games games = new Games();
 List<Player> players = [];
@@ -37,35 +33,6 @@ int lastWorldId = 0;
 int lastUnitId = 0;
 Route.Router myRouter;
 Shelf.Middleware middle;
-
-Player getPlayer(Shelf.Request request){
-  Player player = SimpleSession.session(request)[LOGGED_PLAYER];
-  if(player == null){
-    player = new Player((lastPlayerId++).toString());
-    players.add(player);
-    SimpleSession.session(request)[LOGGED_PLAYER] = player;
-  }
-  return player;
-}
-
-void sendPlayersChange(){
-  for(Player p in players){
-    if(p.socket!=null && p.state==STATE_MATCHMAKING){
-      p.sendMessage(ACTION_PLAYERS_CHANGE, {
-        "players": playersToMatchmakingJson()
-      });
-    }
-  }
-}
-
-List playersToMatchmakingJson(){
-  List out = [];
-  for(Player p in players){
-    if(p.nick==null)continue;
-    out.add(p.toSimpleJson());
-  }
-  return out;
-}
 
 void main(List<String> args){
   runZoned((){
@@ -103,7 +70,6 @@ void handleSockets(socket, protocol, Shelf.Request request){
     outBox["data"] = {};
     Map out = outBox["data"];
     String outAction;
-    print("action $action");
     switch(action){
       case CONTROLLER_STATE:
         outAction = getState(out, player, data);
@@ -211,18 +177,3 @@ Shelf.Response data(Shelf.Request request){
   return new Shelf.Response.ok(file.openRead(), headers: headers);
 }
 
-void route(String path, DHandler handler){
-  myRouter.post(path, (Shelf.Request request)=> controller(request, handler), middleware: middle);
-}
-
-void write(StreamController controller, String out){
-  controller.add(const Utf8Codec().encode(out));
-}
-
-Shelf.Response controller(Shelf.Request request, Function controller){
-  StreamController innerController = new StreamController();
-  Stream<List<int>> out = innerController.stream;
-  controller(request, innerController);
-  var headers = <String, String>{HttpHeaders.CONTENT_TYPE: "text/json"};
-  return new Shelf.Response.ok(out, headers: headers);
-}

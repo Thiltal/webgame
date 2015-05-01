@@ -4,8 +4,8 @@ import 'dart:html';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:math' as Math;
-import '../lib/deskovka_libs.dart';
-import '../lib/ui.dart';
+import 'package:webgame/deskovka_libs.dart';
+import 'package:webgame/ui.dart';
 import "package:mustache_no_mirror/mustache.dart" as Mustache;
 
 part "src/client_world.dart";
@@ -21,6 +21,7 @@ part "src/widgets/matchmaking_players.dart";
 part "src/widgets/matchmaking_widget.dart";
 part "src/widgets/matchmaking_games.dart";
 part "src/widgets/game_phaser.dart";
+part "src/widgets/game_abilities.dart";
 
 List<Function>  repaints = [];
 Map<String, ImageElement> images = {};

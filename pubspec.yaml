@@ -1,4 +1,4 @@
-name: deskovka_client
+name: webgame
 version: 0.0.1
 description: Hexagon webgame
 environment:
