@@ -2,7 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 library deskovka_server;
 import 'dart:io';
-import 'package:args/args.dart';
+import '../packages/args/args.dart';
 import 'package:shelf/shelf.dart' as Shelf;
 import 'package:shelf/shelf_io.dart' as Io;
 import 'package:path/path.dart' show join, dirname;
