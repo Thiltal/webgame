@@ -1,12 +1,17 @@
+library deskovka_server;
+
 import 'dart:io';
+import 'package:args/args.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:path/path.dart' show join, dirname;
+import '../lib/shelf_web_socket/shelf_web_socket.dart' as sWs;
 import '../lib/shelf_static/shelf_static.dart';
 import 'package:shelf_route/shelf_route.dart';
 import 'package:shelf_simple_session/shelf_simple_session.dart';
 import 'dart:async';
 import 'dart:convert';
+import "../lib/deskovka_libs.dart";
 
 
 //Pool pool;
