@@ -134,6 +134,17 @@ file:///C:/project/webgame/web/packages/mustache_no_mirror/char_reader.dart
 file:///C:/project/webgame/web/packages/mustache_no_mirror/mustache.dart
 file:///C:/project/webgame/web/packages/mustache_no_mirror/scanner.dart
 file:///C:/project/webgame/web/packages/mustache_no_mirror/template.dart
+file:///C:/project/webgame/web/packages/path/path.dart
+file:///C:/project/webgame/web/packages/path/src/characters.dart
+file:///C:/project/webgame/web/packages/path/src/context.dart
+file:///C:/project/webgame/web/packages/path/src/internal_style.dart
+file:///C:/project/webgame/web/packages/path/src/parsed_path.dart
+file:///C:/project/webgame/web/packages/path/src/path_exception.dart
+file:///C:/project/webgame/web/packages/path/src/style.dart
+file:///C:/project/webgame/web/packages/path/src/style/posix.dart
+file:///C:/project/webgame/web/packages/path/src/style/url.dart
+file:///C:/project/webgame/web/packages/path/src/style/windows.dart
+file:///C:/project/webgame/web/packages/path/src/utils.dart
 file:///C:/project/webgame/web/packages/webgame/deskovka_libs.dart
 file:///C:/project/webgame/web/packages/webgame/src/abilities/ability.dart
 file:///C:/project/webgame/web/packages/webgame/src/abilities/attack.dart
@@ -176,6 +187,7 @@ file:///C:/project/webgame/web/src/game_map_adapter.dart
 file:///C:/project/webgame/web/src/login.dart
 file:///C:/project/webgame/web/src/matchmaking.dart
 file:///C:/project/webgame/web/src/player.dart
+file:///C:/project/webgame/web/src/widgets/game_abilities.dart
 file:///C:/project/webgame/web/src/widgets/game_phaser.dart
 file:///C:/project/webgame/web/src/widgets/matchmaking_games.dart
 file:///C:/project/webgame/web/src/widgets/matchmaking_players.dart
