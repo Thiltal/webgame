@@ -36,7 +36,7 @@ Shelf.Middleware middle;
 
 void main(List<String> args){
   runZoned((){
-//    load();
+    load();
     var parser = new ArgParser()
       ..addOption('port', abbr: 'p', defaultsTo: '80');
     var result = parser.parse(args);
@@ -45,19 +45,16 @@ void main(List<String> args){
       exit(1);
     });
     var pathToBuild = join(dirname(Platform.script.toFilePath()), '..', 'web');
-    print(pathToBuild);
 //    var pathToBuild = join(dirname(Platform.script.toFilePath().replaceAll("\\bin", "")), 'web');
     var staticHandler = Static.createStaticHandler(pathToBuild, defaultDocument: 'index.html', serveFilesOutsidePath: true, disableCache: true);
-//    middle = SimpleSession.sessionMiddleware(new SimpleSession.SimpleSessionStore());
+    middle = SimpleSession.sessionMiddleware(new SimpleSession.SimpleSessionStore());
 
-//    myRouter = Route.router();
-//    myRouter.get("/$CONTROLLER_DATA", data, middleware: middle);
-//    myRouter.get("/$CONTROLLER_WEBSOCKET", sWs.webSocketHandler(handleSockets), middleware: middle);
+    myRouter = Route.router();
+    myRouter.get("/$CONTROLLER_DATA", data, middleware: middle);
+    myRouter.get("/$CONTROLLER_WEBSOCKET", sWs.webSocketHandler(handleSockets), middleware: middle);
 
-//    Shelf.Handler handler = new Shelf.Cascade().add(myRouter.handler).add(staticHandler).handler;
-//    Shelf.Handler handler = new Shelf.Cascade().add(staticHandler).handler;
-//    Io.serve(handler, InternetAddress.ANY_IP_V4, port).then((server){
-    Io.serve(staticHandler, InternetAddress.ANY_IP_V4, port).then((server){
+    Shelf.Handler handler = new Shelf.Cascade().add(myRouter.handler).add(staticHandler).handler;
+    Io.serve(handler, InternetAddress.ANY_IP_V4, port).then((server){
       print('Serving at http://${server.address.host}:${server.port}');
     });
   }, onError: (e, stackTrace)=> print('Oh noes! $e $stackTrace'));
