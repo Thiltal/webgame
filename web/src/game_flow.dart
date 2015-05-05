@@ -27,7 +27,7 @@ class GameFlow {
 
   void openSocket(){
     String address = 'ws://${window.location.host}/$CONTROLLER_WEBSOCKET';
-    print(address);
+    window.console.log('ws://http://talesgame.herokuapp.com/$CONTROLLER_WEBSOCKET');
     socket = new WebSocket(address);
     socket.onOpen.listen((_){
       send(CONTROLLER_STATE, {});
