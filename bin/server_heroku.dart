@@ -2,24 +2,37 @@ library deskovka_server;
 
 import 'dart:io';
 import 'package:args/args.dart';
-import 'package:shelf/shelf.dart' as shelf;
+import 'package:shelf/shelf.dart' as Shelf;
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:path/path.dart' show join, dirname;
 import '../lib/shelf_web_socket/shelf_web_socket.dart' as sWs;
 import '../lib/shelf_static/shelf_static.dart';
-import 'package:shelf_route/shelf_route.dart';
-import 'package:shelf_simple_session/shelf_simple_session.dart';
+import 'package:shelf_route/shelf_route.dart' as Route;
+import 'package:shelf_simple_session/shelf_simple_session.dart' as SimpleSession;
 import 'dart:async';
 import 'dart:convert';
 import "../lib/deskovka_libs.dart";
+part "src/worlds.dart";
+part "src/player.dart";
+part "src/server_world.dart";
+part "src/load.dart";
+part "src/action.dart";
+part "src/game.dart";
+part "src/games.dart";
+part "src/utils.dart";
 
 
-//Pool pool;
-Router myRouter;
-int nextUserId = 1;
+typedef DHandler(Shelf.Request request, StreamController controller);
+const PATH_TO_RESOURCES = "resources/module.json";
+const LOGGED_PLAYER = "logged";
+Games games = new Games();
+List<Player> players = [];
+int lastPlayerId = 0;
+int lastWorldId = 0;
+int lastUnitId = 0;
+Route.Router myRouter;
+Shelf.Middleware middle;
 
-String uri =
-'postgres://xifqxsdvnegrgu:yqMF8WD0rEnkr_UXWDF_9zVt3K@ec2-54-83-43-49.compute-1.amazonaws.com:5432/dbo2tavcvt2rtl?sslmode=require';
 
 void main() {
 
@@ -53,22 +66,22 @@ void main() {
 
 
 //  SimpleSessionStore store = new SimpleSessionStore();
-  shelf.Middleware middle = sessionMiddleware(new SimpleSessionStore());
+  Shelf.Middleware middle = SimpleSession.sessionMiddleware(new SimpleSession.SimpleSessionStore());
 
-  myRouter = router()..get("/db", (shelf.Request request) {
-    return new shelf.Response.ok("db");
+  myRouter = Route.router()..get("/db", (Shelf.Request request) {
+    return new Shelf.Response.ok("db");
   }, middleware: middle);
 
 
-  shelf.Handler handler = new shelf.Cascade().add(staticHandler).add(myRouter.handler).handler;
+  Shelf.Handler handler = new Shelf.Cascade().add(staticHandler).add(myRouter.handler).handler;
   io.serve(handler, InternetAddress.ANY_IP_V4, port).then((server) {
     print('Serving at http://${server.address.host}:${server.port}');
   });
 
 }
 
-void logout(StreamController controller, shelf.Request request) {
-  Map mySession = session(request);
+void logout(StreamController controller, Shelf.Request request) {
+  Map mySession = SimpleSession.session(request);
   mySession.remove("logged");
   controller.add(const Utf8Codec().encode(JSON.encode({
     "logout": true
