@@ -35,9 +35,9 @@ Shelf.Middleware middle;
 
 
 void main() {
-
+  load();
   var portEnv = Platform.environment['PORT'];
-  var port = portEnv == null ? 9999 : int.parse(portEnv);
+  var port = portEnv == null ? 80 : int.parse(portEnv);
 
   var pathToBuild = join(dirname(Platform.script.toFilePath()), '..', 'web');
 
