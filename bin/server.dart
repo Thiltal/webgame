@@ -44,7 +44,9 @@ void main(List<String> args){
       stdout.writeln('Could not parse port value "$val" into a number.');
       exit(1);
     });
-    var pathToBuild = join(dirname(Platform.script.toFilePath().replaceAll("\\bin", "")), 'web');
+    var pathToBuild = join(dirname(Platform.script.toFilePath()), '..', 'web');
+    print(pathToBuild);
+//    var pathToBuild = join(dirname(Platform.script.toFilePath().replaceAll("\\bin", "")), 'web');
     var staticHandler = Static.createStaticHandler(pathToBuild, defaultDocument: 'index.html', serveFilesOutsidePath: true, disableCache: true);
     middle = SimpleSession.sessionMiddleware(new SimpleSession.SimpleSessionStore());
 
