@@ -26,7 +26,9 @@ class GameFlow {
   }
 
   void openSocket(){
-    socket = new WebSocket('ws://${window.location.host}/$CONTROLLER_WEBSOCKET');
+    String address = 'ws://${window.location.host}/$CONTROLLER_WEBSOCKET';
+    print(address);
+    socket = new WebSocket(address);
     socket.onOpen.listen((_){
       send(CONTROLLER_STATE, {});
     });

@@ -7,6 +7,7 @@ import 'dart:math' as Math;
 import 'package:webgame/deskovka_libs.dart';
 import 'package:webgame/ui.dart';
 import "package:mustache_no_mirror/mustache.dart" as Mustache;
+import 'package:path/path.dart';
 
 part "src/client_world.dart";
 part "src/client_field.dart";
