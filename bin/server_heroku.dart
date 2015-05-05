@@ -39,7 +39,7 @@ void main() {
   load();
   var portEnv = Platform.environment['PORT'];
   var port = portEnv == null ? 80 : int.parse(portEnv);
-  var pathToBuild = join(dirname(Platform.script.toFilePath()), '..', 'build/web');
+  var pathToBuild = join(dirname(Platform.script.toFilePath()), '..', 'web');
   var staticHandler = Static.createStaticHandler(pathToBuild, defaultDocument: 'index.html');
   middle = SimpleSession.sessionMiddleware(new SimpleSession.SimpleSessionStore());
 
